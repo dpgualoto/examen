@@ -1,0 +1,23 @@
+version: '3'
+services:
+  postgres-sql:
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: distribuida
+
+#flyway administra cambios en la base de datos
+#Configuración del servidor
+  books-service:
+    image: dpgualoto/examen:1.0.0
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: admin
+      DB_URL: jdbc:postgresql://postgres-sql:5432/distribuida
+    depends_on:
+      - postgres-sql
+    deploy:
+      replicas: 1
+    ports:
+      - "7001:7001"
