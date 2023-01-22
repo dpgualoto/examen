@@ -15,9 +15,11 @@ services:
       DB_USER: postgres
       DB_PASSWORD: admin
       DB_URL: jdbc:postgresql://postgres-sql:5432/distribuida
+      Server_port: 80
     depends_on:
       - postgres-sql
     deploy:
       replicas: 1
     ports:
-      - "7001:7001"
+      - "80:80"
+      #- "7001:7001"
